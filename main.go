@@ -1,45 +1,27 @@
 package main
 
-import "fmt"
+import(
 
-type ContaCorrente struct {
-	titular string
-	saldo   float64
-}
+"fmt"
+"github.com/Isaac002c/go-orientacao-a-objetos/contas"
 
-type contaDaSilvia struct {
-	titular string
-	saldo   float64
-}
-
-func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
-	podeSacar := valorDoSaque > 0 && valorDoSaque <= c.saldo
-	if podeSacar {
-		c.saldo -= valorDoSaque
-		return "Saque realizado com sucesso"
-	} else {
-		return "Saldo insuficiente"
-	}
-}
-
-func (c *ContaCorrente) Depositar(valorDoDeposito float64) string{
-	podeDepositar := valorDoDeposito >= 0
-	if podeDepositar {
-		c.saldo += valorDoDeposito
-		return "Depósito realizado com sucesso"
-	} else {
-		return "Valor de depósito inválido"
-	}
-}
+)
 
 func main() {
-	contaDaSilvia := ContaCorrente{
-		titular: "Silvia",
-		saldo:   500,
-	}
+	contaDaSilvia := contas.ContaCorrente{Titular: "Silvia", Saldo: 300}
+	contaDoGustavo := contas.ContaCorrente{Titular: "Gustavo", Saldo: 100}
 
-	fmt.Println(contaDaSilvia.saldo)
-	contaDaSilvia.Depositar(-1000)
+
+status := contaDaSilvia.Transferir(200, &contaDoGustavo)
+	fmt.Println(status)
+
 	fmt.Println(contaDaSilvia)
-	fmt.Println(contaDaSilvia.Sacar(1200))
+	fmt.Println(contaDoGustavo)
+
+	// fmt.Println(contaDaSilvia.saldo)
+	// status, valor := contaDaSilvia.Depositar(1000)
+	// fmt.Println(status, valor)
+	// fmt.Println(contaDaSilvia)
+	// fmt.Println(contaDaSilvia.Sacar(1200))
+
 }
