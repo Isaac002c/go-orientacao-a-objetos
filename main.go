@@ -1,27 +1,29 @@
 package main
 
-import(
-
-"fmt"
-"github.com/Isaac002c/go-orientacao-a-objetos/contas"
-
+import (
+	"fmt"
+	// "github.com/Isaac002c/go-orientacao-a-objetos/clientes"
+	"github.com/Isaac002c/go-orientacao-a-objetos/contas"
 )
 
+func PagarBoleto(conta verificarConta, valorDoBoleto float64){
+	conta.Sacar(valorDoBoleto)
+}
+
+type verificarConta interface{
+	Sacar(valor float64) string
+}
+
 func main() {
-	contaDaSilvia := contas.ContaCorrente{Titular: "Silvia", Saldo: 300}
-	contaDoGustavo := contas.ContaCorrente{Titular: "Gustavo", Saldo: 100}
+	contaDoDenis := contas.ContaPoupanca{}
+	contaDoDenis.Depositar(100)
+	PagarBoleto(&contaDoDenis, 60)
 
+	fmt.Println(contaDoDenis.ObterSaldo())
 
-status := contaDaSilvia.Transferir(200, &contaDoGustavo)
-	fmt.Println(status)
+	contaDaLuiza := contas.ContaCorrente{}
+	contaDaLuiza.Depositar(500)
+	PagarBoleto(&contaDaLuiza, 200)
 
-	fmt.Println(contaDaSilvia)
-	fmt.Println(contaDoGustavo)
-
-	// fmt.Println(contaDaSilvia.saldo)
-	// status, valor := contaDaSilvia.Depositar(1000)
-	// fmt.Println(status, valor)
-	// fmt.Println(contaDaSilvia)
-	// fmt.Println(contaDaSilvia.Sacar(1200))
-
+	fmt.Println(contaDaLuiza.ObterSaldo())
 }
